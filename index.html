@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vi Rodriguez | Layout Switcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Base Theme Tokens */
+:root{
+  --bg:#f3f6f4; --ink:#14231f; --muted:#4d5f59; --accent:#1f6f5c; --accent-ink:#ffffff;
+  --panel:#ffffff; --line:#cfdad5; --hero:#14352c; --hero-ink:#eef7f3;
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#0e1714;--ink:#e6f0ec;--muted:#9bb0a8;--accent:#5fc4a8;--accent-ink:#06201a;--panel:#15211d;--line:#27382f;--hero:#0a2a21;--hero-ink:#eef7f3}
+}
+:root[data-theme="dark"]{--bg:#0e1714;--ink:#e6f0ec;--muted:#9bb0a8;--accent:#5fc4a8;--accent-ink:#06201a;--panel:#15211d;--line:#27382f;--hero:#0a2a21;--hero-ink:#eef7f3}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.65 "Work Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0}
+a{color:var(--accent)}
+
+/* Layout Switcher Toolbar */
+.switcher-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--ink);
+  color: var(--hero-ink);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  font-size: 0.9rem;
+}
+.switcher-bar span { font-weight: 600; }
+.switcher-buttons { display: flex; gap: 0.5rem; }
+.switcher-btn {
+  background: transparent;
+  color: var(--hero-ink);
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+.switcher-btn.active, .switcher-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* Hide inactive options */
+.layout-option { display: none; }
+.layout-option.active { display: block; }
+
+/* -------------------------------------------------------------
+   OPTION 1 STYLES: Two-Column Split
+   ------------------------------------------------------------- */
+#option1 .split-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: calc(100vh - 50px);
+}
+@media (min-width: 60rem) {
+  #option1 .split-layout {
+    grid-template-columns: 38% 1fr;
+  }
+  #option1 header {
+    position: sticky;
+    top: 50px;
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+  }
+}
+#option1 header { background:var(--hero); color:var(--hero-ink); padding:3rem 2rem; display:flex; flex-direction:column; justify-content:space-between; }
+#option1 nav { display:flex; gap:1.25rem; padding-bottom:2rem; }
+#option1 nav a { color:var(--hero-ink); text-decoration:none; font-weight:500; }
+#option1 .name { font-size:1.1rem; font-weight:600; opacity:.85; margin:0; }
+#option1 .statement { font-size:clamp(1.5rem,3vw,2.1rem); font-weight:800; margin-top:.75rem; letter-spacing:-.01em; }
+#option1 main { padding: 3rem 2rem; }
+#option1 section { padding-bottom:4rem; }
+#option1 h2 { font-size:2rem; margin-bottom:1.5rem; border-bottom:2px solid var(--line); padding-bottom:.5rem; }
+#option1 .skills { display:flex; flex-wrap:wrap; gap:.6rem; list-style:none; padding:0; margin:0; }
+#option1 .skills li { background:var(--panel); border:1px solid var(--line); padding:.45rem 1rem; border-radius:999px; font-weight:500; }
+#option1 .skills li.top { background:var(--accent); border-color:var(--accent); color:var(--accent-ink); font-weight:600; }
+#option1 .note { color:var(--muted); font-size:.95rem; margin-top:1rem; }
+#option1 .projects { display:grid; gap:1.25rem; grid-template-columns:1fr; }
+#option1 .project { background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:1.5rem; display:flex; flex-direction:column; gap:.75rem; }
+#option1 .project h3 { font-size:1.35rem; }
+#option1 .project p { margin:0; color:var(--muted); }
+#option1 .tags { font-size:.9rem; font-weight:500; }
+#option1 .links { margin-top:auto; display:flex; gap:1rem; font-weight:600; }
+#option1 footer { border-top:1px solid var(--line); padding:2rem 0; color:var(--muted); font-size:.95rem; }
+
+/* -------------------------------------------------------------
+   OPTION 2 STYLES: Card & Dashboard
+   ------------------------------------------------------------- */
+#option2 .wrap { max-width:54rem; margin:0 auto; padding:2rem 1.25rem; }
+#option2 header { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:2rem; margin-bottom:2rem; }
+#option2 .header-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; }
+#option2 nav { display:flex; gap:1.25rem; }
+#option2 nav a { color:var(--ink); text-decoration:none; font-weight:500; }
+#option2 .name { font-size:1.25rem; font-weight:600; margin:0; }
+#option2 .statement { font-size:clamp(1.3rem,3vw,1.8rem); font-weight:600; color:var(--ink); letter-spacing:-.01em; }
+#option2 section { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:2rem; margin-bottom:2rem; }
+#option2 h2 { font-size:1.75rem; margin-bottom:1.5rem; }
+#option2 .skills { display:flex; flex-wrap:wrap; gap:.6rem; list-style:none; padding:0; margin:0; }
+#option2 .skills li { background:var(--bg); border:1px solid var(--line); padding:.45rem 1rem; border-radius:6px; font-weight:500; }
+#option2 .skills li.top { background:var(--accent); border-color:var(--accent); color:var(--accent-ink); font-weight:600; }
+#option2 .note { color:var(--muted); font-size:.95rem; margin-top:1rem; }
+#option2 .projects { display:flex; flex-direction:column; gap:1.5rem; }
+#option2 .project { border-bottom:1px solid var(--line); padding-bottom:1.5rem; display:grid; grid-template-columns:1fr; gap:.5rem; }
+#option2 .project:last-child { border-bottom:none; padding-bottom:0; }
+#option2 .project-header { display:flex; justify-content:space-between; align-items:baseline; }
+#option2 .project h3 { font-size:1.25rem; }
+#option2 .project p { margin:0; color:var(--muted); }
+#option2 .tags { font-size:.85rem; font-weight:500; color:var(--accent); }
+#option2 .links { display:flex; gap:1rem; font-weight:600; margin-top:.5rem; }
+#option2 footer { text-align:center; padding:1rem 0; color:var(--muted); font-size:.95rem; }
+
+/* -------------------------------------------------------------
+   OPTION 3 STYLES: Top Bar & Grid
+   ------------------------------------------------------------- */
+#option3 .wrap { max-width:68rem; margin:0 auto; padding:0 1.5rem; }
+#option3 .top-bar { border-bottom:1px solid var(--line); background:var(--panel); }
+#option3 .nav-wrap { display:flex; justify-content:space-between; align-items:center; padding:1rem 0; }
+#option3 .name { font-size:1.2rem; font-weight:600; margin:0; }
+#option3 nav { display:flex; gap:1.5rem; }
+#option3 nav a { color:var(--ink); text-decoration:none; font-weight:500; }
+#option3 .hero-box { background:var(--hero); color:var(--hero-ink); padding:3.5rem 2.5rem; border-radius:12px; margin-top:2rem; }
+#option3 .statement { font-size:clamp(1.5rem,3.5vw,2.2rem); font-weight:700; margin:0; }
+#option3 section { padding:3.5rem 0; }
+#option3 h2 { font-size:1.8rem; margin-bottom:1.5rem; }
+#option3 .skills-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(13rem, 1fr)); gap:0.75rem; list-style:none; padding:0; margin:0; }
+#option3 .skills-grid li { background:var(--panel); border:1px solid var(--line); padding:0.75rem 1rem; border-radius:6px; font-weight:500; }
+#option3 .skills-grid li.top { border-left:4px solid var(--accent); font-weight:600; }
+#option3 .note { color:var(--muted); font-size:.95rem; margin-top:1rem; }
+#option3 .projects { display:grid; gap:1.5rem; grid-template-columns:repeat(auto-fit,minmax(18rem,1fr)); }
+#option3 .project { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:1.75rem; display:flex; flex-direction:column; gap:.75rem; }
+#option3 .project h3 { font-size:1.35rem; }
+#option3 .project p { margin:0; color:var(--muted); }
+#option3 .tags { font-size:.9rem; font-weight:500; color:var(--accent); }
+#option3 .links { margin-top:auto; display:flex; gap:1rem; font-weight:600; padding-top:0.5rem; }
+#option3 footer { border-top:1px solid var(--line); padding:2.5rem 0; color:var(--muted); font-size:.95rem; }
+</style>
+</head>
+<body>
+
+<div class="switcher-bar">
+  <span>Preview Layout Options:</span>
+  <div class="switcher-buttons">
+    <button class="switcher-btn active" onclick="showOption('option1', this)">Option 1: Split Screen</button>
+    <button class="switcher-btn" onclick="showOption('option2', this)">Option 2: Dashboard Cards</button>
+    <button class="switcher-btn" onclick="showOption('option3', this)">Option 3: Top Nav Grid</button>
+  </div>
+</div>
+
+<!-- OPTION 1 -->
+<div id="option1" class="layout-option active">
+  <div class="split-layout">
+    <header>
+      <p class="name">Vi Rodriguez</p>
+      <h1 class="statement">Supply chain management student with a background in agriculture, dedicated to developing sustainable, efficient logistics strategies that strengthen the movement of food from farm to market while preserving environmental resources.</h1>
+      <nav aria-label="Main">
+        <a href="#skills-1">Skills</a>
+        <a href="#projects-1">Projects</a>
+        <a href="#contact-1">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="skills-1">
+        <h2>Skills</h2>
+        <ul class="skills">
+          <li class="top">Leadership</li>
+          <li class="top">Project coordination</li>
+          <li class="top">Supply chain sustainability</li>
+          <li class="top">Environmental conservation</li>
+          <li>Business logistics</li>
+          <li>Inventory &amp; demand planning</li>
+          <li>Agricultural operations</li>
+          <li>Sourcing &amp; vendor relations</li>
+          <li>Data analysis (Excel)</li>
+          <li>Process improvement</li>
+          <li>Team collaboration</li>
+          <li>Clear written communication</li>
+        </ul>
+        <p class="note">Highlighted skills are the ones I use most.</p>
+      </section>
+
+      <section id="projects-1">
+        <h2>Projects</h2>
+        <div class="projects">
+          <article class="project">
+            <h3>Study Planner</h3>
+            <p>A weekly planner that lets students add assignments, set due dates and tick them off. Data is saved in the browser so nothing is lost on refresh.</p>
+            <div class="tags">HTML · CSS · JavaScript</div>
+            <div class="links">
+              <a href="https://github.com/your-username/study-planner">Code</a>
+              <a href="https://your-username.github.io/study-planner">Live demo</a>
+            </div>
+          </article>
+          <article class="project">
+            <h3>Weather Now</h3>
+            <p>Search any city and see current conditions and a five-day forecast, pulled from a public weather API.</p>
+            <div class="tags">JavaScript · REST API</div>
+            <div class="links">
+              <a href="https://github.com/your-username/weather-now">Code</a>
+              <a href="https://your-username.github.io/weather-now">Live demo</a>
+            </div>
+          </article>
+          <article class="project">
+            <h3>Budget Tracker</h3>
+            <p>A command-line tool that reads a CSV of expenses and prints monthly totals by category.</p>
+            <div class="tags">Python · CSV</div>
+            <div class="links">
+              <a href="https://github.com/your-username/budget-tracker">Code</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <footer id="contact-1">
+        Contact: <a href="mailto:alex@example.com">alex@example.com</a> · <a href="https://github.com/your-username">GitHub</a>
+      </footer>
+    </main>
+  </div>
+</div>
+
+<!-- OPTION 2 -->
+<div id="option2" class="layout-option">
+  <div class="wrap">
+    <header>
+      <div class="header-top">
+        <p class="name">Vi Rodriguez</p>
+        <nav aria-label="Main">
+          <a href="#skills-2">Skills</a>
+          <a href="#projects-2">Projects</a>
+          <a href="#contact-2">Contact</a>
+        </nav>
+      </div>
+      <h1 class="statement">Supply chain management student with a background in agriculture, dedicated to developing sustainable, efficient logistics strategies that strengthen the movement of food from farm to market while preserving environmental resources.</h1>
+    </header>
+
+    <main>
+      <section id="skills-2">
+        <h2>Skills</h2>
+        <ul class="skills">
+          <li class="top">Leadership</li>
+          <li class="top">Project coordination</li>
+          <li class="top">Supply chain sustainability</li>
+          <li class="top">Environmental conservation</li>
+          <li>Business logistics</li>
+          <li>Inventory &amp; demand planning</li>
+          <li>Agricultural operations</li>
+          <li>Sourcing &amp; vendor relations</li>
+          <li>Data analysis (Excel)</li>
+          <li>Process improvement</li>
+          <li>Team collaboration</li>
+          <li>Clear written communication</li>
+        </ul>
+        <p class="note">Highlighted skills are the ones I use most.</p>
+      </section>
+
+      <section id="projects-2">
+        <h2>Projects</h2>
+        <div class="projects">
+          <article class="project">
+            <div class="project-header">
+              <h3>Study Planner</h3>
+              <span class="tags">HTML · CSS · JavaScript</span>
+            </div>
+            <p>A weekly planner that lets students add assignments, set due dates and tick them off. Data is saved in the browser so nothing is lost on refresh.</p>
+            <div class="links">
+              <a href="https://github.com/your-username/study-planner">Code</a>
+              <a href="https://your-username.github.io/study-planner">Live demo</a>
+            </div>
+          </article>
+          <article class="project">
+            <div class="project-header">
+              <h3>Weather Now</h3>
+              <span class="tags">JavaScript · REST API</span>
+            </div>
+            <p>Search any city and see current conditions and a five-day forecast, pulled from a public weather API.</p>
+            <div class="links">
+              <a href="https://github.com/your-username/weather-now">Code</a>
+              <a href="https://your-username.github.io/weather-now">Live demo</a>
+            </div>
+          </article>
+          <article class="project">
+            <div class="project-header">
+              <h3>Budget Tracker</h3>
+              <span class="tags">Python · CSV</span>
+            </div>
+            <p>A command-line tool that reads a CSV of expenses and prints monthly totals by category.</p>
+            <div class="links">
+              <a href="https://github.com/your-username/budget-tracker">Code</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact-2">
+      Contact: <a href="mailto:alex@example.com">alex@example.com</a> · <a href="https://github.com/your-username">GitHub</a>
+    </footer>
+  </div>
+</div>
+
+<!-- OPTION 3 -->
+<div id="option3" class="layout-option">
+  <div class="top-bar">
+    <div class="wrap nav-wrap">
+      <p class="name">Vi Rodriguez</p>
+      <nav aria-label="Main">
+        <a href="#skills-3">Skills</a>
+        <a href="#projects-3">Projects</a>
+        <a href="#contact-3">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero-box">
+      <h1 class="statement">Supply chain management student with a background in agriculture, dedicated to developing sustainable, efficient logistics strategies that strengthen the movement of food from farm to market while preserving environmental resources.</h1>
+    </header>
+
+    <main>
+      <section id="skills-3">
+        <h2>Skills</h2>
+        <ul class="skills-grid">
+          <li class="top">Leadership</li>
+          <li class="top">Project coordination</li>
+          <li class="top">Supply chain sustainability</li>
+          <li class="top">Environmental conservation</li>
+          <li>Business logistics</li>
+          <li>Inventory &amp; demand planning</li>
+          <li>Agricultural operations</li>
+          <li>Sourcing &amp; vendor relations</li>
+          <li>Data analysis (Excel)</li>
+          <li>Process improvement</li>
+          <li>Team collaboration</li>
+          <li>Clear written communication</li>
+        </ul>
+        <p class="note">Highlighted skills are the ones I use most.</p>
+      </section>
+
+      <section id="projects-3">
+        <h2>Projects</h2>
+        <div class="projects">
+          <article class="project">
+            <h3>Study Planner</h3>
+            <p>A weekly planner that lets students add assignments, set due dates and tick them off. Data is saved in the browser so nothing is lost on refresh.</p>
+            <div class="tags">HTML · CSS · JavaScript</div>
+            <div class="links">
+              <a href="https://github.com/your-username/study-planner">Code</a>
+              <a href="https://your-username.github.io/study-planner">Live demo</a>
+            </div>
+          </article>
+          <article class="project">
+            <h3>Weather Now</h3>
+            <p>Search any city and see current conditions and a five-day forecast, pulled from a public weather API.</p>
+            <div class="tags">JavaScript · REST API</div>
+            <div class="links">
+              <a href="https://github.com/your-username/weather-now">Code</a>
+              <a href="https://your-username.github.io/weather-now">Live demo</a>
+            </div>
+          </article>
+          <article class="project">
+            <h3>Budget Tracker</h3>
+            <p>A command-line tool that reads a CSV of expenses and prints monthly totals by category.</p>
+            <div class="tags">Python · CSV</div>
+            <div class="links">
+              <a href="https://github.com/your-username/budget-tracker">Code</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact-3">
+      Contact: <a href="mailto:alex@example.com">alex@example.com</a> · <a href="https://github.com/your-username">GitHub</a>
+    </footer>
+  </div>
+</div>
+
+<script>
+function showOption(optionId, btn) {
+  document.querySelectorAll('.layout-option').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.switcher-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(optionId).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>
