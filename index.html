@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vi Rodriguez | Supply Chain Management</title>
+<meta name="description" content="Portfolio of Vi Rodriguez, supply chain management major focused on sustainable agricultural logistics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f6f4; --ink:#14231f; --muted:#4d5f59; --accent:#1f6f5c; --accent-ink:#ffffff;
+  --panel:#ffffff; --line:#cfdad5; --hero:#14352c; --hero-ink:#eef7f3;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#0e1714;--ink:#e6f0ec;--muted:#9bb0a8;--accent:#5fc4a8;--accent-ink:#06201a;--panel:#15211d;--line:#27382f;--hero:#0a2a21;--hero-ink:#eef7f3}
+}
+:root[data-theme="dark"]{--bg:#0e1714;--ink:#e6f0ec;--muted:#9bb0a8;--accent:#5fc4a8;--accent-ink:#06201a;--panel:#15211d;--line:#27382f;--hero:#0a2a21;--hero-ink:#eef7f3}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.65 "Work Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem}
+
+/* Top Bar Navigation */
+.top-bar {
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+.nav-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+.name{font-size:1.2rem;font-weight:600;margin:0}
+nav{display:flex;gap:1.5rem}
+nav a{color:var(--ink);text-decoration:none;font-weight:500}
+nav a:hover{color:var(--accent)}
+
+/* Hero Section with Headshot */
+.hero-box {
+  background: var(--hero);
+  color: var(--hero-ink);
+  padding: 3.5rem 2.5rem;
+  border-radius: 12px;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+.headshot {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  flex-shrink: 0;
+}
+.statement{font-size:clamp(1.35rem,2.8vw,2rem);font-weight:700;margin:0}
+
+@media (max-width: 45rem) {
+  .hero-box {
+    flex-direction: column;
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    gap: 1.5rem;
+  }
+}
+
+section{padding:3.5rem 0}
+h2{font-size:1.8rem;margin-bottom:1.5rem}
+
+/* Skills Grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.skills-grid li {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+.skills-grid li.top {
+  border-left: 4px solid var(--accent);
+  font-weight: 600;
+}
+.note{color:var(--muted);font-size:.95rem;margin-top:1rem}
+
+/* Projects Grid */
+.projects{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr))}
+.project{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:1.75rem;display:flex;flex-direction:column;gap:.75rem}
+.project h3{font-size:1.35rem}
+.project p{margin:0;color:var(--muted)}
+.tags{font-size:.9rem;font-weight:500;color:var(--accent)}
+.links{margin-top:auto;display:flex;gap:1rem;font-weight:600;padding-top:0.5rem}
+
+footer{border-top:1px solid var(--line);padding:2.5rem 0;color:var(--muted);font-size:.95rem}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="wrap nav-wrap">
+    <p class="name">Vi Rodriguez</p>
+    <nav aria-label="Main">
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero-box">
+    <img class="headshot" src="headshot.jpeg" alt="Vi Rodriguez headshot">
+    <h1 class="statement" id="about">Supply chain management student with a background in agriculture, dedicated to developing sustainable, efficient logistics strategies that strengthen the movement of products to consumers while preserving environmental resources.</h1>
+  </header>
+
+  <main>
+    <section id="skills">
+      <h2>Skills</h2>
+      <ul class="skills-grid">
+        <li class="top">Leadership</li>
+        <li class="top">Project coordination</li>
+        <li class="top">Supply chain sustainability</li>
+        <li class="top">Environmental conservation</li>
+        <li>Business logistics</li>
+        <li>Inventory &amp; demand planning</li>
+        <li>Agricultural operations</li>
+        <li>Sourcing &amp; vendor relations</li>
+        <li>Data analysis (Excel)</li>
+        <li>Process improvement</li>
+        <li>Team collaboration</li>
+        <li>Clear written communication</li>
+      </ul>
+      <p class="note">Highlighted skills are the ones I use most.</p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects">
+        <article class="project">
+          <h3>Agricultural Logistics &amp; Harvest Data Tracking</h3>
+          <p>Analyzed agricultural production metrics to streamline supply chain movements and track seasonal harvest yields for optimized distribution planning.</p>
+          <div class="tags">Data Analysis · Logistics · Harvest Data</div>
+          <div class="links">
+            <a href="resources/sheet.css">Harvest Data Sheet</a>
+          </div>
+        </article>
+        <article class="project">
+          <h3>Black Heritage Trail Conservation Project</h3>
+          <p>Planned and executed environmental restoration goals along the Black Heritage Trail in Montgomery, New Jersey by removing invasive plant species, replanting native foliage, and educating trail patrons on the vital importance of outdoor environmental conservation.</p>
+          <div class="tags">Environmental Conservation · Habitat Restoration · Community Education</div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    Contact: <a href="mailto:alex@example.com">alex@example.com</a> · <a href="https://github.com/your-username">GitHub</a>
+  </footer>
+</div>
+
+</body>
+</html>
